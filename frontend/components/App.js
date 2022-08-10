@@ -21,15 +21,25 @@ export default class App extends React.Component {
   }
   onClear = evt => {
     evt.preventDefault()
-    console.log(this.state.todoData.filter(e => e.completed === true))
+    const doneTask = this.state.todoData.filter(e => e.completed === true)
+
+    // doneTask.forEach(e => {
+    //   axios.delete(`http://localhost:9000/api/todos/${e.id}`)
+    //     .then(res => {
+    //       console.log(res)
+    //     })
+    //     .catch(err => console.log(err))
+    // })
   }
   onChange = evt => {
     this.setState(() => ({newTodo: {"name": evt.target.value}}))
-    console.log(this.state.newTodo)
+    // console.log(this.state.newTodo)
   }
-  onComplete = evt => {
-    // axios.patch(`http://localhost:9000/api/todos/${null}`)
-    console.log('test')
+  onComplete = todo => {
+    axios.patch(`http://localhost:9000/api/todos/${todo.id}`)
+    
+    // this.setState(() => ({todoData}))
+    // console.log(todo.completed)
   }
   constructor(props) {
     super(props)
@@ -54,18 +64,20 @@ export default class App extends React.Component {
   }
 
   componentDidUpdate(oldProps, oldState) {
-    console.log('<App> updated')
-    // axios.get('http://localhost:9000/api/todos')
-    //   .then(res => {
-    //     this.setState(() => ({todoData: res.data.data}))
-    //   })
-    //   .catch(err => console.log(err))
+    console.log(oldState, this.state)
+    if(oldState.todoData !== this.state.todoData) {
+      axios.get('http://localhost:9000/api/todos')
+      .then(res => {
+        this.setState(() => ({todoData: res.data.data}))
+      })
+      .catch(err => console.log(err))
+    }
   }
 
   render() {
     return (
       <>
-      <TodoList todoData={this.state.todoData}/>
+      <TodoList todoData={this.state.todoData} onComplete={this.onComplete}/>
       <Form onSubmit={this.onSubmit} onClear={this.onClear} onChange={this.onChange} form={this.state.formInput}/>
       </>
     )
