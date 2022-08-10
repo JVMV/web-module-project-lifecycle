@@ -8,7 +8,7 @@ export default class Form extends React.Component {
     return (
       <>
       <form onSubmit={this.props.onSubmit}>
-        <input type='text' placeholder='add a todo item' onChange={this.props.onChange} name='name'/>
+        <input type='text' placeholder='add a todo item' onChange={this.props.onChange} name='name' />
         <button>Add</button><br />
       </form>
       <button onClick={this.props.onClear}>Clear Complete</button>
