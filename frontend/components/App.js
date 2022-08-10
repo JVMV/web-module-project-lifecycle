@@ -11,6 +11,10 @@ export default class App extends React.Component {
         {
           task: 'test task',
           completed: false
+        },
+        {
+          task: 'another task',
+          completed: true
         }
       ]
     }

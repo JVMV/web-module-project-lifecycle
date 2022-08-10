@@ -7,8 +7,7 @@ export default class Todo extends React.Component {
   render() {
     return (
       <>
-      <p>{`${this.props.todo[0].task}`}</p>
-      {/* {console.log(this.props.todo[0])} */}
+      <p>{`${this.props.todo.task} || ${this.props.todo.completed === true ? 'done' : 'not finished'}`}</p>
       </>
     )
   }

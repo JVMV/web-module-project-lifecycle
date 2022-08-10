@@ -7,8 +7,7 @@ export default class TodoList extends React.Component {
   render() {
     return (
       <>
-      {/* {this.todoData.forEach(todo => <Todo todo={todo}/>)} */}
-      <Todo todo={this.props.todoData} />
+      {this.props.todoData.map(todo => <Todo todo={todo} />)}
       </>
     )
   }
