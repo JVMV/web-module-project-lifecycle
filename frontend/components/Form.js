@@ -1,16 +1,18 @@
 import React from 'react'
 
 export default class Form extends React.Component {
-  onSubmit = event => {
-    event.preventDefault()
+  constructor(props) {
+    super(props)
   }
   render() {
     return (
-      <form>
-        <input type='text' placeholder='add a todo item' />
-        <button onClick={this.onSubmit}>Add</button><br />
-        <button onClick={this.onSubmit}>Clear Complete</button>
+      <>
+      <form onSubmit={this.props.onSubmit}>
+        <input type='text' placeholder='add a todo item' onChange={this.props.onChange} name='name'/>
+        <button>Add</button><br />
       </form>
+      <button onClick={this.props.onClear}>Clear Complete</button>
+      </>
     )
   }
 }
